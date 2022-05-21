@@ -27,11 +27,12 @@ public class Prueba {
                 listaFiltrada.add(producto);
             }
         }
-        Producto producto = new Producto(3,"bici2",2,2,3,50.6);
+        Producto producto = new Producto(4,"bici2",2,2,3,50.6);
 //        int cont =new ProductoDaoJDBC().insertar(producto);
-//        System.out.println(cont);
+//        
 
-        int cont =new ProductoDaoJDBC().eliminar(producto);
+        int cont =new ProductoDaoJDBC().actualizar(producto);
+        System.out.println(cont);
         System.out.println(listaFiltrada);
         
         System.out.println("caracter".contains("rac"));

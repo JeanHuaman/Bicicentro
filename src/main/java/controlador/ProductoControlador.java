@@ -24,19 +24,19 @@ import modelo.Producto;
 @WebServlet("/ProductoControlador")
 public class ProductoControlador extends HttpServlet{
     
-    
+ 
     @Override
     protected void doGet(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException{
         String accion = request.getParameter("accion");
         if(accion!=null)
         {
             switch(accion){
-//                case "buscar":  
-//                    this.productosFiltrados(request, response);
-//                    break;
-//                case "eliminar":
-//                    this.eliminarCliente(request,response);
-//                    break;
+                case "editar":  
+                    this.editarProducto(request, response);
+                    break;
+                case "eliminar":
+                    this.eliminarProducto(request,response);
+                    break;                
                 default:
                     this.accionDefault(request, response);
                     break;
@@ -46,6 +46,7 @@ public class ProductoControlador extends HttpServlet{
         }
     }
     
+    @Override
     protected void doPost(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException{
         String accion = request.getParameter("accion");
         if(accion!=null)
@@ -54,9 +55,12 @@ public class ProductoControlador extends HttpServlet{
                 case "buscar":  
                     this.productosFiltrados(request, response);
                     break;
-//                case "eliminar":
-//                    this.eliminarCliente(request,response);
-//                    break;
+                case "modificar":
+                    this.modificarProducto(request,response);
+                    break;
+                case "agregarProducto":
+                    this.agregarProducto(request,response);
+                    break;
                 default:
                     this.accionDefault(request, response);
                     break;
@@ -68,22 +72,22 @@ public class ProductoControlador extends HttpServlet{
     
     private void accionDefault(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException
     {
-        List<Marca> marcas = new MarcaDaoJDBC().getListaMarca();
-        List<Categoria> categorias = new CategoriaDaoJDBC().getListaCategoria();
+        
         HttpSession session = request.getSession();
         
-        
+        List<Marca> marcas = new MarcaDaoJDBC().getListaMarca();
+        List<Categoria> categorias = new CategoriaDaoJDBC().getListaCategoria();
         
         session.setAttribute("marcas", marcas);
         session.setAttribute("categorias", categorias);
         
-        response.sendRedirect("administrador.jsp");
+        response.sendRedirect("vista/administrador.jsp");
     }
     
     private void productosFiltrados(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException{
         List<Producto> productos= new ProductoDaoJDBC().listar();
         List<Producto> listaFiltrada= new ArrayList();
-//        HttpSession sesion = request.getSession();
+
         String nombreFiltrado = request.getParameter("buscarProducto");
         if(nombreFiltrado!=null && !nombreFiltrado.equals(""))
         {
@@ -92,12 +96,56 @@ public class ProductoControlador extends HttpServlet{
                 {
                     listaFiltrada.add(producto);
                 }
-            }
-        request.setAttribute("productos",listaFiltrada);
-        }
+            }           
         
-        request.getRequestDispatcher("administrador.jsp").forward(request, response);
+        }
+        request.setAttribute("productos",listaFiltrada);
+        
+        request.getRequestDispatcher("vista/administrador.jsp").forward(request, response);
 
+    }
+    
+    private void eliminarProducto(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException{
+        int idProducto = Integer.parseInt(request.getParameter("idProducto"));
+       Producto producto = new Producto(idProducto);
+       int registrosModificados = new ProductoDaoJDBC().eliminar(producto);
+       this.accionDefault(request, response);
+    }    
+    
+    private void editarProducto(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException{
+        int idProducto = Integer.parseInt(request.getParameter("idProducto"));
+        Producto producto = new ProductoDaoJDBC().encontrar(new Producto(idProducto));
+        request.setAttribute("producto",producto);
+        request.getRequestDispatcher("vista/editarProducto.jsp").forward(request, response);
+        
+    }
+    
+    private void modificarProducto(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException{
+        int idProducto = Integer.parseInt(request.getParameter("idProducto"));
+        String nombre=request.getParameter("nombre");
+        int idcategoria=Integer.parseInt(request.getParameter("categoria"));
+        int idmarca=Integer.parseInt(request.getParameter("marca"));
+        int cantidad=Integer.parseInt(request.getParameter("cantidad"));
+        double precio=Double.parseDouble(request.getParameter("precio"));
+        
+        Producto producto = new Producto(idProducto,nombre,idmarca,idcategoria,cantidad,precio);
+
+        int registrosModificados = new ProductoDaoJDBC().actualizar(producto);
+        request.setAttribute("producto",producto);
+        this.accionDefault(request, response);
+    }
+    
+    private void agregarProducto(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException{
+        String nombre = request.getParameter("nombre");
+        int idmarca = Integer.parseInt(request.getParameter("marca"));
+        int idcategoria = Integer.parseInt(request.getParameter("categoria"));
+        double precio = Double.parseDouble(request.getParameter("precio"));
+        int cantidad = Integer.parseInt(request.getParameter("cantidad"));
+        
+        Producto producto = new Producto(nombre,idmarca,idcategoria,cantidad,precio);
+        
+        int cantidadInserto = new ProductoDaoJDBC().insertar(producto);
+        this.accionDefault(request, response);
     }
 }
 
