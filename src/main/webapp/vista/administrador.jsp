@@ -1,12 +1,20 @@
+<%@page import="modelo.Categoria"%>
+<%@page import="modelo.Marca"%>
 <%@page import="datos.MarcaDaoJDBC"%>
 <%@page import="datos.CategoriaDaoJDBC"%>
 <%@page import="modelo.Producto"%>
 <%@page import="java.util.List"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+
+<%
+List<Marca> marcas = new MarcaDaoJDBC().getListaMarca();
+List<Categoria> categorias = new CategoriaDaoJDBC().getListaCategoria();
+%>
 <!DOCTYPE html>
 <html>
     <head>
+        
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Administrador de Productos</title>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
@@ -86,11 +94,15 @@
                                                 <input class="form-control" type="text" name="nombre"/>
                                             </div>
                                             <div class="mb-3 col-3"> 
-                                                <label class="form-label" for="imagen">Marca</label>
+                                                <label class="form-label" for="marca">Marca</label>
                                                 <select class="form-select" name="marca">
-                                                    <c:forEach var="marca" items="${marcas}">
-                                                        <option value="${marca.idMarca}">${marca.nombreMarca}</option>
-                                                    </c:forEach>
+                                                    <% 
+                                                        for(Marca marca:marcas){
+                                                    %>
+                                                    <option value="<%= marca.getIdMarca() %>"><%= marca.getNombreMarca() %> </option>
+                                                    <%
+                                                        }
+                                                    %>                                                    
                                                 </select>
                                             </div> 
                                             <div class="mb-3 col-3">
@@ -102,9 +114,13 @@
                                             <div class="mb-3 col-3">
                                                 <label class="form-label" for="imagen">Categoria</label>
                                                 <select class="form-select" name="categoria">
-                                                    <c:forEach var="categoria" items="${categorias}">
-                                                        <option value="${categoria.idCategoria}">${categoria.nombreCategoria}</option>
-                                                    </c:forEach>
+                                                     <% 
+                                                        for(Categoria categoria:categorias){
+                                                    %>
+                                                    <option value="<%= categoria.getIdCategoria() %>" selected="<%= new CategoriaDaoJDBC().getNombreCategoria(categoria.getIdCategoria()) %>"><%= categoria.getNombreCategoria() %> </option>
+                                                    <%
+                                                        }
+                                                    %> 
                                                 </select>
                                             </div>
                                             <div class="mb-3 col-3">
