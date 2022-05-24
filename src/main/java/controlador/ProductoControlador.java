@@ -74,13 +74,7 @@ public class ProductoControlador extends HttpServlet{
     {
         
         HttpSession session = request.getSession();
-        
-//        List<Marca> marcas = new MarcaDaoJDBC().getListaMarca();
-//        List<Categoria> categorias = new CategoriaDaoJDBC().getListaCategoria();
-//        
-//        session.setAttribute("marcas", marcas);
-//        session.setAttribute("categorias", categorias);
-        
+                
         response.sendRedirect("vista/administrador.jsp");
     }
     
