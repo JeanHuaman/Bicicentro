@@ -10,12 +10,9 @@ public class Conexion {
    
     private static final String JDBC_URL="jdbc:mysql://localhost:3306/bicicentro?useSSL=false&useTimezone=true&serverTimezone=UTC&allowPublicKeyRetrieval=true";
     private static final String JDBC_USER = "root";
-<<<<<<< HEAD
+
     private static final String JDBC_PASSWORD = "";
-=======
-    private static final String JDBC_PASSWORD = "123456";
->>>>>>> ce384bb071ddd8e82af62a5f00535f4fb91b60fb
-    
+       
     private static BasicDataSource dataSource;
     
     public static DataSource getDataSource(){
