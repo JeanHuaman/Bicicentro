@@ -7,8 +7,8 @@
 <%
     List<Marca> marcas = new MarcaDaoJDBC().getListaMarca();
     List<Categoria> categorias = new CategoriaDaoJDBC().getListaCategoria();
-    
-    
+
+
 %>
 <html>
     <head>
@@ -20,31 +20,30 @@
         <header class="bg-success bg-gradient py-2">
             <h1 class="text-center container">Editar Producto</h1>
         </header>
-       <%
-         Producto producto = (Producto)request.getAttribute("producto");  
-       %>
+        <%           Producto producto = (Producto) request.getAttribute("producto");
+        %>
         <main class="container mt-3">
-            <form action="${pageContext.request.contextPath}/ProductoControlador?accion=modificar&idProducto=<%= producto.getIdProducto() %>" method="POST">
+            <form action="${pageContext.request.contextPath}/ProductoControlador?accion=modificar&idProducto=<%= producto.getIdProducto()%>" method="POST">
                 <div>
                     <div class="mb-3">
                         <label  for="nombre">Nombre</label>
-                        <input class="form-control" type="text" name="nombre" value="<%= producto.getNombre() %>"/>
+                        <input class="form-control" type="text" name="nombre" value="<%= producto.getNombre()%>"/>
                     </div>
                     <div class="mb-3">
                         <label class="form-label" for="imagen">Categoria</label>
                         <select class="form-select" name="categoria">
                             <%
                                 for (Categoria categoria : categorias) {
-                                    if(categoria.getIdCategoria() == producto.getIdCategoria())
-                                    {
+                                    if (categoria.getIdCategoria() == producto.getIdCategoria()) {
                             %>
                             <option value="<%= categoria.getIdCategoria()%>" selected><%= categoria.getNombreCategoria()%> </option>
                             <%
-                                }else{
+                            } else {
                             %>
                             <option value="<%= categoria.getIdCategoria()%>"><%= categoria.getNombreCategoria()%> </option>
                             <%
-                                }}
+                                    }
+                                }
                             %> 
                         </select>
                     </div>
@@ -53,30 +52,34 @@
                         <select class="form-select" name="marca">
                             <%
                                 for (Marca marca : marcas) {
-                                    if(marca.getIdMarca() == producto.getIdCategoria())
-                                    {
+                                    if (marca.getIdMarca() == producto.getIdCategoria()) {
                             %>
-                            <option value="<%= marca.getIdMarca()%>" selected><%= marca.getNombreMarca() %> </option>
+                            <option value="<%= marca.getIdMarca()%>" selected><%= marca.getNombreMarca()%> </option>
                             <%
-                                }else{
+                            } else {
                             %>
                             <option value="<%= marca.getIdMarca()%>"><%= marca.getNombreMarca()%> </option>
                             <%
-                                }}
+                                    }
+                                }
                             %>                                                    
                         </select>
                     </div>
                     <div class="mb-3">
                         <label class="form-label" for="cantidad">Cantidad</label>
-                        <input class="form-control" type="number" name="cantidad" value="<%= producto.getCantidad() %>"/>
+                        <input class="form-control" type="number" name="cantidad" value="<%= producto.getCantidad()%>"/>
                     </div>
                     <div class="mb-3">
                         <label class="form-label" for="precio">Precio</label>
-                        <input class="form-control" type="number" name="precio" value="<%= producto.getPrecio() %>" step="any"/>
+                        <input class="form-control" type="number" name="precio" value="<%= producto.getPrecio()%>" step="any"/>
+                    </div>
+                    <div class="form-floating">
+                        <textarea class="form-control" name="descripcion" placeholder="Leave a comment here" id="floatingTextarea"><%= producto.getDescripcion()%></textarea>
+                        <label for="floatingTextarea">Descripción</label>
                     </div>
                 </div>
-                <div class="d-grid">
-                    <button class="btn btn-primary " type="submit">Guardar</button>
+                <div class="d-grid py-2">
+                    <button class="btn btn-primary" type="submit">Guardar</button>
                 </div>
 
             </form>

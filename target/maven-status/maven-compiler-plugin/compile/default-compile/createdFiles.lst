@@ -1,9 +1,12 @@
 modelo\Marca.class
 datos\MarcaDaoJDBC.class
 controlador\Prueba.class
+datos\UsuarioDaoJDBC.class
+modelo\Categoria.class
+controlador\UsuarioControlador.class
+datos\CategoriaDaoJDBC.class
 modelo\Producto.class
 datos\Conexion.class
-modelo\Categoria.class
 controlador\ProductoControlador.class
-datos\CategoriaDaoJDBC.class
+modelo\Usuario.class
 datos\ProductoDaoJDBC.class

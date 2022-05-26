@@ -4,14 +4,14 @@ package modelo;
 
 public class Usuario {
     private int idUsuario;
-    private String nombre;
-    private String apellido;
-    private String celular;
-    private String email;
-    private String dni;
-    private String direccion;
-    private String user;
-    private String password;
+    private String nombre="";
+    private String apellido="";
+    private String celular="";
+    private String email="";
+    private String dni="";
+    private String direccion="";
+    private String user="";
+    private String password="";
 
     public Usuario() {
     }
@@ -19,6 +19,18 @@ public class Usuario {
     public Usuario(int idUsuario) {
         this.idUsuario = idUsuario;
     }
+
+    public Usuario(String email, String user, String password) {
+        this.email = email;
+        this.user = user;
+        this.password = password;
+    }
+
+    public Usuario(String user, String password) {
+        this.user = user;
+        this.password = password;
+    }
+    
 
     public Usuario(String nombre, String apellido, String celular, String email, String dni, String direccion, String user, String password) {
         this.nombre = nombre;

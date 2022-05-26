@@ -1,3 +1,4 @@
+<%@page import="modelo.Usuario"%>
 <%@page import="datos.MarcaDaoJDBC"%>
 <%@page import="datos.CategoriaDaoJDBC"%>
 <%@page import="modelo.Producto"%>
@@ -25,25 +26,35 @@
             <div>
                 <a href="${pageContext.request.contextPath}/vista/login.jsp">Iniciar Sesión</a>
             </div>
-
-
+            <%
+                Usuario usuario = (Usuario) session.getAttribute("usuario");
+                if (usuario != null) {
+            %>
+            <p><%= usuario.getIdUsuario() %> </p>
+            <p><%= usuario.getUser() %> </p>
+            <p><%= usuario.getEmail() %> </p>
+            <p><%= usuario.getPassword() %> </p>
+            <%
+                }
+            %>
+                        <a href="${pageContext.request.contextPath}/vista/pedido.jsp" >Ver Pedido</a>
+            <a href="${pageContext.request.contextPath}/vista/editarUsuario.jsp" >Datos personales</a>
         </nav>
         <div class="container mt-4">
             <div class="row">
-                <%
-                    for (Producto producto : productos) {
+                <%                    for (Producto producto : productos) {
                 %>
                 <div class="card col-4">
                     <div class="card-header">
-                        <label class="col-sm-12"><%= producto.getNombre() %></label>                                    
+                        <label class="col-sm-12"><%= producto.getNombre()%></label>                                    
                     </div>
                     <div class="card-body text-center d-flex">
-                        <label><i class="fas fa-dollar-sign"><%= new CategoriaDaoJDBC().getNombreCategoria(producto.getIdCategoria()) %></i></label>
+                        <label><i class="fas fa-dollar-sign"><%= new CategoriaDaoJDBC().getNombreCategoria(producto.getIdCategoria())%></i></label>
                         <img src="#" width="200" height="170">
                     </div>
                     <div class="card-footer">
                         <div class="col-sm-12">
-                            <label><%= new MarcaDaoJDBC().getNombreMarca(producto.getIdMarca()) %></label>                                   
+                            <label><%= new MarcaDaoJDBC().getNombreMarca(producto.getIdMarca())%></label>                                   
                         </div>
                         <div class=" col-sm-12 text-center">                                
                             <a href="Controlador?accion=AgregarCarrito&id=#" class="btn btn2 btn-outline-primary">Agregar a Carrito<i class="fas fa-cart-plus"></i></a>
@@ -51,8 +62,8 @@
                         </div>                         
                     </div>
                 </div>
-                <% 
-                    }  
+                <%
+                    }
                 %>
                 <c:forEach var="p" items="${productos}">
                     <div class="col-sm-4">

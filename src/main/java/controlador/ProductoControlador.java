@@ -73,7 +73,7 @@ public class ProductoControlador extends HttpServlet{
     private void accionDefault(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException
     {
         
-        HttpSession session = request.getSession();
+        
                 
         response.sendRedirect("vista/administrador.jsp");
     }
@@ -121,8 +121,9 @@ public class ProductoControlador extends HttpServlet{
         int idmarca=Integer.parseInt(request.getParameter("marca"));
         int cantidad=Integer.parseInt(request.getParameter("cantidad"));
         double precio=Double.parseDouble(request.getParameter("precio"));
+        String descripcion = request.getParameter("descripcion");
         
-        Producto producto = new Producto(idProducto,nombre,idmarca,idcategoria,cantidad,precio);
+        Producto producto = new Producto(idProducto,nombre,idmarca,idcategoria,cantidad,precio,descripcion);
 
         int registrosModificados = new ProductoDaoJDBC().actualizar(producto);
         request.setAttribute("producto",producto);
@@ -135,8 +136,9 @@ public class ProductoControlador extends HttpServlet{
         int idcategoria = Integer.parseInt(request.getParameter("categoria"));
         double precio = Double.parseDouble(request.getParameter("precio"));
         int cantidad = Integer.parseInt(request.getParameter("cantidad"));
+        String descripcion = request.getParameter("descripcion");
         
-        Producto producto = new Producto(nombre,idmarca,idcategoria,cantidad,precio);
+        Producto producto = new Producto(nombre,idmarca,idcategoria,cantidad,precio,descripcion);
         
         int cantidadInserto = new ProductoDaoJDBC().insertar(producto);
         this.accionDefault(request, response);

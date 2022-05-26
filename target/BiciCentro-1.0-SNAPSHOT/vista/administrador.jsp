@@ -4,17 +4,15 @@
 <%@page import="datos.CategoriaDaoJDBC"%>
 <%@page import="modelo.Producto"%>
 <%@page import="java.util.List"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <%
-List<Marca> marcas = new MarcaDaoJDBC().getListaMarca();
-List<Categoria> categorias = new CategoriaDaoJDBC().getListaCategoria();
+    List<Marca> marcas = new MarcaDaoJDBC().getListaMarca();
+    List<Categoria> categorias = new CategoriaDaoJDBC().getListaCategoria();
 %>
 <!DOCTYPE html>
 <html>
     <head>
-        
+
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Administrador de Productos</title>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
@@ -23,7 +21,7 @@ List<Categoria> categorias = new CategoriaDaoJDBC().getListaCategoria();
         <header class="bg-success bg-gradient py-2">
             <div class="container row mx-auto">
                 <div class="col-3 justify-content-left">
-                    <img src="../imagen/logo.png" alt="logo" width="100px" height="100px">
+                    <img src="./imagen/logo.png" alt="logo" width="100px" height="100px">
                 </div>
                 <div class="col-9 align-self-center text-center">
                     <h1>BiciCentro</h1>
@@ -53,7 +51,7 @@ List<Categoria> categorias = new CategoriaDaoJDBC().getListaCategoria();
                                 <th>Categoria</th>
                                 <th>Marca</th>
                                 <th>Precio</th>
-                                <th>AcciÃ³n</th>
+                                <th>Acción</th>
                                 </thead>
                                 <tbody>
                                     <%
@@ -96,10 +94,10 @@ List<Categoria> categorias = new CategoriaDaoJDBC().getListaCategoria();
                                             <div class="mb-3 col-3"> 
                                                 <label class="form-label" for="marca">Marca</label>
                                                 <select class="form-select" name="marca">
-                                                    <% 
-                                                        for(Marca marca:marcas){
+                                                    <%
+                                                        for (Marca marca : marcas) {
                                                     %>
-                                                    <option value="<%= marca.getIdMarca() %>"><%= marca.getNombreMarca() %> </option>
+                                                    <option value="<%= marca.getIdMarca()%>"><%= marca.getNombreMarca()%> </option>
                                                     <%
                                                         }
                                                     %>                                                    
@@ -114,10 +112,10 @@ List<Categoria> categorias = new CategoriaDaoJDBC().getListaCategoria();
                                             <div class="mb-3 col-3">
                                                 <label class="form-label" for="imagen">Categoria</label>
                                                 <select class="form-select" name="categoria">
-                                                     <% 
-                                                        for(Categoria categoria:categorias){
+                                                    <%
+                                                        for (Categoria categoria : categorias) {
                                                     %>
-                                                    <option value="<%= categoria.getIdCategoria() %>" selected="<%= new CategoriaDaoJDBC().getNombreCategoria(categoria.getIdCategoria()) %>"><%= categoria.getNombreCategoria() %> </option>
+                                                    <option value="<%= categoria.getIdCategoria()%>" selected="<%= new CategoriaDaoJDBC().getNombreCategoria(categoria.getIdCategoria())%>"><%= categoria.getNombreCategoria()%> </option>
                                                     <%
                                                         }
                                                     %> 
@@ -132,14 +130,13 @@ List<Categoria> categorias = new CategoriaDaoJDBC().getListaCategoria();
                                                 <input class="form-control" type="number" name="cantidad"/>
                                             </div> 
                                         </div>
-                                        <div>
-                                            <textarea name="descripcion"></textarea>
+                                        <div class="row justify-content-center">
+                                            <textarea class="col" name="descripcion" placeholder="Escribe una descripción"></textarea>                                            
+                                        </div>
+                                        <div class="d-grid">
+                                            <input class="btn btn-primary col-10 mx-auto" type="submit" value="Agregar"/>
                                         </div>
                                     </div>
-                                    <div class="d-grid">
-                                        <input class="btn btn-primary col-10 mx-auto" type="submit" value="Agregar"/>
-                                    </div>
-                                </div>
                             </form>
                         </div>
                     </div>
