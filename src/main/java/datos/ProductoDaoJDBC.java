@@ -38,7 +38,7 @@ public class ProductoDaoJDBC {
                 double precio = rs.getDouble("precio");
                 String decripcion = rs.getString("descripcion");
                 
-            producto = new Producto(idProducto,nombre_producto,idMarca,idCategoria,cantidad,precio,decripcion);
+            producto = new Producto(idProducto,nombre_producto,"../img/biciRojo.jpg",idMarca,idCategoria,cantidad,precio,decripcion);
             productos.add(producto);
             }
         } catch (SQLException ex) {

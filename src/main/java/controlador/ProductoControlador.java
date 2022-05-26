@@ -123,7 +123,7 @@ public class ProductoControlador extends HttpServlet{
         double precio=Double.parseDouble(request.getParameter("precio"));
         String descripcion = request.getParameter("descripcion");
         
-        Producto producto = new Producto(idProducto,nombre,idmarca,idcategoria,cantidad,precio,descripcion);
+        Producto producto = new Producto(idProducto,nombre,"../img/biciRojo.jpg",idmarca,idcategoria,cantidad,precio,descripcion);
 
         int registrosModificados = new ProductoDaoJDBC().actualizar(producto);
         request.setAttribute("producto",producto);
@@ -138,7 +138,7 @@ public class ProductoControlador extends HttpServlet{
         int cantidad = Integer.parseInt(request.getParameter("cantidad"));
         String descripcion = request.getParameter("descripcion");
         
-        Producto producto = new Producto(nombre,idmarca,idcategoria,cantidad,precio,descripcion);
+        Producto producto = new Producto(nombre,"../img/biciRojo.jpg",idmarca,idcategoria,cantidad,precio,descripcion);
         
         int cantidadInserto = new ProductoDaoJDBC().insertar(producto);
         this.accionDefault(request, response);
