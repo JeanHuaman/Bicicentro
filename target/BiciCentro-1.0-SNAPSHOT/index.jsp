@@ -24,7 +24,7 @@
                 <h1>BiciCentro</h1>     
             </div>
             <div>
-                <a href="${pageContext.request.contextPath}/vista/login.jsp">Iniciar Sesión</a>
+                <a href="${pageContext.request.contextPath}/vista/login.jsp">Iniciar Sesiï¿½n</a>
             </div>
             <%
                 Usuario usuario = (Usuario) session.getAttribute("usuario");

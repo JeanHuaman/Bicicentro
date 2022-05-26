@@ -8,10 +8,11 @@ import org.apache.commons.dbcp2.BasicDataSource;
 
 public class Conexion {
    
-    private static final String JDBC_URL="jdbc:mysql://localhost:3306/bicicentro?useSSL=false&useTimezone=true&serverTimezone=UTC&allowPublicKeyRetrieval=true";
+    private static final String JDBC_URL="jdbc:mysql://localhost:3306/bicicentro1?useSSL=false&useTimezone=true&serverTimezone=UTC&allowPublicKeyRetrieval=true";
     private static final String JDBC_USER = "root";
-    private static final String JDBC_PASSWORD = "123456";
-    
+
+    private static final String JDBC_PASSWORD = "";
+       
     private static BasicDataSource dataSource;
     
     public static DataSource getDataSource(){
@@ -55,5 +56,9 @@ public class Conexion {
         } catch (SQLException ex) {
             ex.printStackTrace(System.out);
         }
+    }
+
+    public Connection getConnection() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

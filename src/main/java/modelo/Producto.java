@@ -1,5 +1,7 @@
 package modelo;
 
+import java.io.InputStream;
+
 public class Producto {
    private int idProducto;
    private String nombre;
@@ -60,12 +62,6 @@ public class Producto {
         this.descripcion = descripcion;
     }
 
-    
-
-    
-
-   
-
     public int getIdProducto() {
         return idProducto;
     }
@@ -82,20 +78,12 @@ public class Producto {
         this.nombre = nombre;
     }
 
-    public double getPrecio() {
-        return precio;
+    public String getImagen() {
+        return imagen;
     }
 
-    public void setPrecio(double precio) {
-        this.precio = precio;
-    }
-
-    public int getCantidad() {
-        return cantidad;
-    }
-
-    public void setCantidad(int cantidad) {
-        this.cantidad = cantidad;
+    public void setImagen(String imagen) {
+        this.imagen = imagen;
     }
 
     public int getIdMarca() {
@@ -114,10 +102,27 @@ public class Producto {
         this.idCategoria = idCategoria;
     }
 
+    public int getCantidad() {
+        return cantidad;
+    }
+
+    public void setCantidad(int cantidad) {
+        this.cantidad = cantidad;
+    }
+
+    public double getPrecio() {
+        return precio;
+    }
+
+    public void setPrecio(double precio) {
+        this.precio = precio;
+    }
+
+
     
     @Override
     public String toString() {
-        return "Producto{" + "idProducto=" + idProducto + ", nombre=" + nombre + ", precio=" + precio + ", cantidad=" + cantidad + ", idMarca=" + idMarca + ", idCategoria=" + idCategoria + '}';
+        return "Producto{" + "idProducto=" + idProducto + ", nombre=" + nombre + ",imagen=" + imagen + " ,precio=" + precio + ", cantidad=" + cantidad + ", idMarca=" + idMarca + ", idCategoria=" + idCategoria + '}';
     }    
    
 }

@@ -132,6 +132,7 @@ public class ProductoControlador extends HttpServlet{
     
     private void agregarProducto(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException{
         String nombre = request.getParameter("nombre");
+        String Foto = request.getParameter("Foto");
         int idmarca = Integer.parseInt(request.getParameter("marca"));
         int idcategoria = Integer.parseInt(request.getParameter("categoria"));
         double precio = Double.parseDouble(request.getParameter("precio"));
