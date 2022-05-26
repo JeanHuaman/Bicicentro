@@ -10,10 +10,10 @@ import java.util.List;
 import modelo.Producto;
 
 public class ProductoDaoJDBC {
-    private static final String SELECT_PRODUCTO="SELECT id_producto,nombre_producto,id_marca,id_categoria,cantidad,precio,descripcion FROM producto";
-    private static final String SELECT_PRODUCTO_BY_ID="SELECT id_producto,nombre_producto,id_marca,id_categoria,cantidad,precio,descripcion FROM producto WHERE id_producto=?";
-    private static final String INSERT_PRODUCTO = "INSERT INTO producto(nombre_producto,id_marca,id_categoria,cantidad,precio,descripcion) VALUES(?,?,?,?,?,?)";
-    private static final String UPDATE_PRODUCTO = "UPDATE producto SET nombre_producto=?,id_marca=?,id_categoria=?,cantidad=?,precio=?,descripcion=? WHERE id_producto=?";
+    private static final String SELECT_PRODUCTO="SELECT id_producto,nombre_producto,id_marca,id_categoria,cantidad,precio,descripcion,imagen FROM producto";
+    private static final String SELECT_PRODUCTO_BY_ID="SELECT id_producto,nombre_producto,imagen,id_marca,id_categoria,cantidad,precio,descripcion FROM producto WHERE id_producto=?";
+    private static final String INSERT_PRODUCTO = "INSERT INTO producto(nombre_producto,id_marca,id_categoria,cantidad,precio,descripcion,imagen) VALUES(?,?,?,?,?,?,?)";
+    private static final String UPDATE_PRODUCTO = "UPDATE producto SET nombre_producto=?,id_marca=?,id_categoria=?,cantidad=?,precio=?,descripcion=?,imagen=? WHERE id_producto=?";
     private static final String DELETE_PRODUCTO = "DELETE FROM producto WHERE id_producto=?";
     
     public List<Producto> listar()
@@ -37,8 +37,9 @@ public class ProductoDaoJDBC {
                 int cantidad = rs.getInt("cantidad");
                 double precio = rs.getDouble("precio");
                 String decripcion = rs.getString("descripcion");
+                String imagen = rs.getString("imagen");
                 
-            producto = new Producto(idProducto,nombre_producto,idMarca,idCategoria,cantidad,precio,decripcion);
+            producto = new Producto(idProducto,nombre_producto,imagen,idMarca,idCategoria,cantidad,precio,decripcion);
             productos.add(producto);
             }
         } catch (SQLException ex) {
@@ -101,6 +102,7 @@ public class ProductoDaoJDBC {
              stmt.setInt(4,producto.getCantidad());
              stmt.setDouble(5,producto.getPrecio());
              stmt.setString(6, producto.getDescripcion());
+             stmt.setString(7, producto.getImagen());
              rows = stmt.executeUpdate();
          }catch(SQLException ex){
              ex.printStackTrace(System.out);
@@ -126,7 +128,8 @@ public class ProductoDaoJDBC {
              stmt.setInt(4,producto.getCantidad());
              stmt.setDouble(5,producto.getPrecio());
              stmt.setString(6, producto.getDescripcion());
-             stmt.setInt(7,producto.getIdProducto());
+             stmt.setString(7, producto.getImagen());
+             stmt.setInt(8,producto.getIdProducto());
              rows = stmt.executeUpdate();
          }catch(SQLException ex){
              ex.printStackTrace(System.out);

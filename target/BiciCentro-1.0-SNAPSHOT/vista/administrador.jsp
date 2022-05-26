@@ -105,7 +105,13 @@
                                             </div> 
                                             <div class="mb-3 col-3">
                                                 <label class="form-label" for="imagen">Imagen</label>
-                                                <input type="image" name="imagen"/>
+                                                <select class="form-select" name="imagen">
+                                                    <option value="../img/biciGras.jpg">Montañera</option>
+                                                    <option value="../img/biciNaranja.jpg">Bmx</option>
+                                                    <option value="../img/biciNegroRojo.jpg">Bicicleta Plegable</option>
+                                                    <option value="../img/biciRojo.jpg">Triatlón</option>
+                                                    <option value="../img/biciVerdeAzul.jpg">paseo</option>
+                                                </select>
                                             </div>
                                         </div>
                                         <div class="row justify-content-center">

@@ -137,8 +137,9 @@ public class ProductoControlador extends HttpServlet{
         double precio = Double.parseDouble(request.getParameter("precio"));
         int cantidad = Integer.parseInt(request.getParameter("cantidad"));
         String descripcion = request.getParameter("descripcion");
+        String imagen = request.getParameter("imagen");
         
-        Producto producto = new Producto(nombre,idmarca,idcategoria,cantidad,precio,descripcion);
+        Producto producto = new Producto(nombre,imagen,idmarca,idcategoria,cantidad,precio,descripcion);
         
         int cantidadInserto = new ProductoDaoJDBC().insertar(producto);
         this.accionDefault(request, response);

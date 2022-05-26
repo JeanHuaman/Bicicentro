@@ -23,6 +23,10 @@
         <%           Producto producto = (Producto) request.getAttribute("producto");
         %>
         <main class="container mt-3">
+            categoria
+            <%= producto.getIdCategoria() %>
+            marca
+            <%= producto.getIdMarca() %>
             <form action="${pageContext.request.contextPath}/ProductoControlador?accion=modificar&idProducto=<%= producto.getIdProducto()%>" method="POST">
                 <div>
                     <div class="mb-3">
@@ -30,7 +34,7 @@
                         <input class="form-control" type="text" name="nombre" value="<%= producto.getNombre()%>"/>
                     </div>
                     <div class="mb-3">
-                        <label class="form-label" for="imagen">Categoria</label>
+                        <label class="form-label" for="categoria">Categoria</label>
                         <select class="form-select" name="categoria">
                             <%
                                 for (Categoria categoria : categorias) {
@@ -52,8 +56,10 @@
                         <select class="form-select" name="marca">
                             <%
                                 for (Marca marca : marcas) {
-                                    if (marca.getIdMarca() == producto.getIdCategoria()) {
+                                    if (marca.getIdMarca() == producto.getIdMarca()) {
+                                   
                             %>
+                            
                             <option value="<%= marca.getIdMarca()%>" selected><%= marca.getNombreMarca()%> </option>
                             <%
                             } else {

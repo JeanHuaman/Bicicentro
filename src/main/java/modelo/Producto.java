@@ -3,21 +3,25 @@ package modelo;
 public class Producto {
    private int idProducto;
    private String nombre;
+   private String imagen;
    private int idMarca;
    private int idCategoria;
    private int cantidad;
    private double precio;
    private String descripcion;
 
-    public Producto(int idProducto, String nombre, int idMarca, int idCategoria, int cantidad, double precio, String descripcion) {
+    public Producto(int idProducto, String nombre, String imagen, int idMarca, int idCategoria, int cantidad, double precio, String descripcion) {
         this.idProducto = idProducto;
         this.nombre = nombre;
+        this.imagen = imagen;
         this.idMarca = idMarca;
         this.idCategoria = idCategoria;
         this.cantidad = cantidad;
         this.precio = precio;
         this.descripcion = descripcion;
     }
+
+    
    
    
 
@@ -28,7 +32,26 @@ public class Producto {
         this.idProducto = idProducto;
     }
 
-    public Producto(String nombre, int idMarca, int idCategoria, int cantidad, double precio, String descripcion) {
+    public Producto(String nombre, String imagen, int idMarca, int idCategoria, int cantidad, double precio, String descripcion) {
+        this.nombre = nombre;
+        this.imagen = imagen;
+        this.idMarca = idMarca;
+        this.idCategoria = idCategoria;
+        this.cantidad = cantidad;
+        this.precio = precio;
+        this.descripcion = descripcion;
+    }
+
+    public String getImagen() {
+        return imagen;
+    }
+
+    public void setImagen(String imagen) {
+        this.imagen = imagen;
+    }
+
+    public Producto(int idProducto, String nombre, int idMarca, int idCategoria, int cantidad, double precio, String descripcion) {
+        this.idProducto = idProducto;
         this.nombre = nombre;
         this.idMarca = idMarca;
         this.idCategoria = idCategoria;
@@ -36,6 +59,8 @@ public class Producto {
         this.precio = precio;
         this.descripcion = descripcion;
     }
+
+    
 
     public String getDescripcion() {
         return descripcion;
