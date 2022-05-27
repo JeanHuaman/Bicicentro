@@ -25,9 +25,9 @@ public class PedidoControlador extends HttpServlet {
                 case "historial":
                     this.historial(request, response);
                     break;
-//                case "actualizarCantidad":
-//                    this.actualizarCantidad(request, response);
-//                    break;
+                case "detallePedido":
+                    this.detallePedido(request, response);
+                    break;
                 default:
                     this.accionDefault(request, response);
                     break;
@@ -100,6 +100,10 @@ public class PedidoControlador extends HttpServlet {
         
         request.setAttribute("pedidos", pedidos);
         request.getRequestDispatcher("./vista/historial.jsp").forward(request, response);
+    }
+    
+    private void detallePedido(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        
     }
     
     private String generarCodigo() {

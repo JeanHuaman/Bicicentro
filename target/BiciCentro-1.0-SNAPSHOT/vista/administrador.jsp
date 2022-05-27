@@ -21,7 +21,7 @@
         <header class="bg-success bg-gradient py-2">
             <div class="container row mx-auto">
                 <div class="col-3 justify-content-left">
-                    <img src="./imagen/logo.png" alt="logo" width="100px" height="100px">
+                    <img src="${pageContext.request.contextPath}/img/logo.png" alt="logo" width="100px" height="100px">
                 </div>
                 <div class="col-9 align-self-center text-center">
                     <h1>BiciCentro</h1>

@@ -9,7 +9,7 @@
         <header>
             <nav class="d-flex">
                 <div>
-                    <img src="${pageContext.request.contextPath}/imagen/logo.png">
+                    <img src="${pageContext.request.contextPath}/img/Logo.png">
                 </div>
                 <h1>BiciCentro</h1>
                 <div>
@@ -30,7 +30,7 @@
                         </div>
                         <p>Despachado por Bicicentro</p>
                         <div>
-                            <a href="${pageContext.request.contextPath}/vista/detallePedido.jsp">Ver Detalle</a>
+                            <a href="${pageContext.request.contextPath}/PedidoControlador?accion=detallePedido&idPedido=${pedido.getIdPedido()}">Ver Detalle</a>
                         </div>
                     </div>
                     <div>
