@@ -3,10 +3,15 @@ datos\MarcaDaoJDBC.class
 controlador\Prueba.class
 datos\UsuarioDaoJDBC.class
 modelo\Categoria.class
+modelo\DetallePedido.class
 controlador\UsuarioControlador.class
 datos\CategoriaDaoJDBC.class
+datos\DetallePedidoDaoJDBC.class
+modelo\Pedido.class
 modelo\Producto.class
 datos\Conexion.class
+datos\PedidoDaoJDBC.class
+controlador\PedidoControlador.class
 controlador\ProductoControlador.class
 modelo\Usuario.class
 datos\ProductoDaoJDBC.class

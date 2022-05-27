@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page import="modelo.Usuario"%>
 <%
     Usuario usuario = (Usuario) session.getAttribute("usuario");
@@ -28,12 +29,12 @@
     <body>
         <header class="p-3">
             <div>
-                <a class="btn btn-primary">Ir al catálogo</a>
+                <a class="btn btn-primary" href="${pageContext.request.contextPath}/index.jsp">Ir al catálogo</a>
             </div>
         </header>
         <main>
             <section>
-                <form class="row justify-content-around">
+                <form class="row justify-content-around" action="${pageContext.request.contextPath}/PedidoControlador?accion=guardarPedido" method="POST">
                     <article class="col-5">
                         <div><h2>Ya casi terminas</h2></div>
                         <div class="mb-3">
@@ -74,11 +75,17 @@
                                     </thead>
                                     <tbody>
                                         <!-- Aquí es el foreach-->
-                                        <tr>
-                                            <td>Bicicleta</td>
-                                            <td> - x1 + </td>
-                                            <td>$ 550.00</td>
-                                        </tr>
+                                        <c:forEach var="producto" items="${carrito}">
+                                            <tr>
+                                                <td>${producto.getNombre()}</td>
+                                                <td>
+                                                    <a href="${pageContext.request.contextPath}/UsuarioControlador?accion=actualizarCantidad&motivo=aumentar&idProducto=${producto.getIdProducto()}">+</a>
+                                                    <input type="text" min="1" id="cantidad" value="${producto.getCantidad()}" />
+                                                    <a href="${pageContext.request.contextPath}/UsuarioControlador?accion=actualizarCantidad&motivo=disminuir&idProducto=${producto.getIdProducto()}">-</a>
+                                                </td>
+                                                <td>$ ${producto.getPrecio() * producto.getCantidad()}</td>
+                                            </tr> 
+                                        </c:forEach>                                        
                                     </tbody>
                                 </table>
                             </div>
@@ -87,7 +94,7 @@
                                     <span>Total a Pagar</span>
                                 </div>
                                 <div>
-                                    <span>$1000</span>
+                                    <span>${total}</span>
                                 </div>
                             </div>
                             <div>
@@ -98,7 +105,6 @@
                 </form>
             </section>
         </main>
-
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     </body>
 </html>

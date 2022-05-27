@@ -70,6 +70,7 @@ public class ProductoDaoJDBC {
             int cantidad = rs.getInt("cantidad");
             double precio = rs.getDouble("precio");
             String descripcion = rs.getString("descripcion");
+            String imagen = rs.getString("imagen");
             
             producto.setNombre(nombre_producto);
             producto.setIdMarca(idMarca);
@@ -77,6 +78,7 @@ public class ProductoDaoJDBC {
             producto.setCantidad(cantidad);
             producto.setPrecio(precio);
             producto.setDescripcion(descripcion);
+            producto.setImagen(imagen);
             
             
         } catch (SQLException ex) {

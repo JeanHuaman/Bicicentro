@@ -124,10 +124,11 @@ public class Producto {
         this.idCategoria = idCategoria;
     }
 
-    
     @Override
     public String toString() {
-        return "Producto{" + "idProducto=" + idProducto + ", nombre=" + nombre + ", precio=" + precio + ", cantidad=" + cantidad + ", idMarca=" + idMarca + ", idCategoria=" + idCategoria + '}';
-    }    
+        return "Producto{" + "idProducto=" + idProducto + ", nombre=" + nombre + ", imagen=" + imagen + ", idMarca=" + idMarca + ", idCategoria=" + idCategoria + ", cantidad=" + cantidad + ", precio=" + precio + ", descripcion=" + descripcion + '}';
+    }
+
+   
    
 }
