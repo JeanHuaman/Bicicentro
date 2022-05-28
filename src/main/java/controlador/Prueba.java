@@ -29,10 +29,10 @@ public class Prueba {
 //                listaFiltrada.add(producto);
 //            }
 //        }
-//        Producto producto = new Producto(4,"bici2",2,2,3,50.6,"descripcion");
-////        int cont =new ProductoDaoJDBC().insertar(producto);
-////        
-//
+        Producto producto = new Producto(10);
+     int cont =new ProductoDaoJDBC().eliminar(producto);
+        System.out.println(cont);
+
 //        int cont =new ProductoDaoJDBC().actualizar(producto);
 //        System.out.println(cont);
 //        System.out.println(listaFiltrada);

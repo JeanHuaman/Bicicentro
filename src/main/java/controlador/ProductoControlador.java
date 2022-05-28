@@ -98,7 +98,7 @@ public class ProductoControlador extends HttpServlet{
         int idProducto = Integer.parseInt(request.getParameter("idProducto"));
        Producto producto = new Producto(idProducto);
        int registrosModificados = new ProductoDaoJDBC().eliminar(producto);
-       this.accionDefault(request, response);
+       request.getRequestDispatcher("vista/administrador.jsp").forward(request, response);
     }    
     
     private void editarProducto(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException{
@@ -122,7 +122,7 @@ public class ProductoControlador extends HttpServlet{
 
         int registrosModificados = new ProductoDaoJDBC().actualizar(producto);
         request.setAttribute("producto",producto);
-        this.accionDefault(request, response);
+         response.sendRedirect("vista/administrador.jsp");
     }
     
     private void agregarProducto(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException{
@@ -137,7 +137,7 @@ public class ProductoControlador extends HttpServlet{
         Producto producto = new Producto(nombre,imagen,idmarca,idcategoria,cantidad,precio,descripcion);
         
         int cantidadInserto = new ProductoDaoJDBC().insertar(producto);
-        request.getRequestDispatcher("vista/editarProducto.jsp").forward(request, response);
+        response.sendRedirect("vista/administrador.jsp");
     }
 }
 

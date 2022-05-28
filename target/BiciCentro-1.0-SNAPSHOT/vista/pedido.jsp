@@ -24,43 +24,49 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Resumen de Pedido</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+        <link href="${pageContext.request.contextPath}/estilos/style.css" rel="stylesheet" type="text/css" />
+        <title>Resumen del Pedido</title>
     </head>
     <body>
         <header class="p-3">
             <nav>
-                <div>
-                    <a class="btn btn-primary" href="${pageContext.request.contextPath}/index.jsp">Ir al catálogo</a>
+                <div class="row mx-2">
+                    <div class="col-6">
+                        <a class="btn btn-primary" href="${pageContext.request.contextPath}/index.jsp">Ir al catálogo</a>
+                    </div>
+                    <%                Usuario usuario = (Usuario) session.getAttribute("usuario");
+                        if (usuario != null) {
+                    %>            
+                    <div class="nav-item dropdown col-6 text-right">
+                        <a class="nav-link dropdown-toggle fs-4" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <%= usuario.getUser()%>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="${pageContext.request.contextPath}/vista/editarUsuario.jsp">Datos Personales</a></li>
+                            <li><a class="dropdown-item" href="${pageContext.request.contextPath}/PedidoControlador?accion=historial&idUsuario=<%= usuario.getIdUsuario()%>">Ver Historial</a></li>
+                            <li><a class="dropdown-item" href="${pageContext.request.contextPath}/UsuarioControlador?accion=cerrarSesion">Cerrar Sesión</a></li>
+                        </ul>
+                    </div>
+                    <%
+                    } else {
+                    %>
+                    <div>
+                        <a href="${pageContext.request.contextPath}/vista/login.jsp">Iniciar Sesión</a>
+                    </div>
+                    <%
+                        }
+                    %>
                 </div>
-                <%                Usuario usuario = (Usuario) session.getAttribute("usuario");
-                    if (usuario != null) {
-                %>            
-                <div class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        <%= usuario.getUser()%>
-                    </a>
-                    <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="${pageContext.request.contextPath}/vista/editarUsuario.jsp">Datos Personales</a></li>
-                        <li><a class="dropdown-item" href="${pageContext.request.contextPath}/PedidoControlador?accion=historial&idUsuario=<%= usuario.getIdUsuario()%>">Ver Historial</a></li>
-                        <li><a class="dropdown-item" href="${pageContext.request.contextPath}/UsuarioControlador?accion=cerrarSesion">Cerrar Sesión</a></li>
-                    </ul>
-                </div>
-                <%
-                } else {
-                %>
-                <div>
-                    <a href="${pageContext.request.contextPath}/vista/login.jsp">Iniciar Sesión</a>
-                </div>
-                <%
-                    }
-                %>
             </nav>
         </header>
         <main>
-            <section>
+            <section class="container">
                 <form class="row justify-content-around" action="${pageContext.request.contextPath}/PedidoControlador?accion=guardarPedido" method="POST">
-                    <article class="col-5">
+                    <article class="col-12 col-sm-6">
                         <div><h2>Ya casi terminas</h2></div>
                         <div class="mb-3">
                             <label for="direccion" class="form-label">¿En dónde enviamos el pedido?</label>
@@ -92,24 +98,26 @@
                             </div>                            
                         </div>
                     </article>
-                    <article class="col-5">
+                    <article class="col-12 col-sm-6">
                         <div><h1>Resumen del Pedido</h1></div>
                         <div>
                             <div>
-                                <table>
-                                    <thead>
-                                    <th>Nombre del producto</th>
-                                    <th>Cantidad</th>
-                                    <th>SubTotal</th>
+                                <table class="table">
+                                    <thead>                                   
+                                        <tr>
+                                            <th >Nombre del producto</th>
+                                            <th >Cantidad</th>
+                                            <th >SubTotal</th>
+                                        </tr>
                                     </thead>
-                                    <tbody>
+                                    <tbody class="resumen">
                                         <!-- Aquí es el foreach-->
                                         <c:forEach var="producto" items="${carrito}">
-                                            <tr>
+                                            <tr class="fs-5">
                                                 <td>${producto.getNombre()}</td>
-                                                <td>
-                                                    <a href="${pageContext.request.contextPath}/UsuarioControlador?accion=actualizarCantidad&motivo=aumentar&idProducto=${producto.getIdProducto()}">+</a>
-                                                    <input type="text" min="1" id="cantidad" value="${producto.getCantidad()}" />
+                                                <td >
+                                                    <a  href="${pageContext.request.contextPath}/UsuarioControlador?accion=actualizarCantidad&motivo=aumentar&idProducto=${producto.getIdProducto()}">+</a>
+                                                    <input style="width : 25px; border: 0;" type="text" min="1" id="cantidad" value="${producto.getCantidad()}" />
                                                     <a href="${pageContext.request.contextPath}/UsuarioControlador?accion=actualizarCantidad&motivo=disminuir&idProducto=${producto.getIdProducto()}">-</a>
                                                     <a href="${pageContext.request.contextPath}/UsuarioControlador?accion=retirarProducto&idProducto=${producto.getIdProducto()}">Eliminar</a>
                                                 </td>
@@ -119,16 +127,16 @@
                                     </tbody>
                                 </table>
                             </div>
-                            <div>
-                                <div>
+                            <div class="row fs-4 my-2">
+                                <div class="col-6 text-left">
                                     <span>Total a Pagar</span>
                                 </div>
-                                <div>
+                                <div class="col-6 text-right">
                                     <span>${total}</span>
                                 </div>
                             </div>
                             <div>
-                                <button type="submit">Finalizar Compra</button>
+                                <button type="submit" class="btn btn-primary w-100 fs-4">Finalizar Compra</button>
                             </div>
                             <c:if test="${usuario==null}">
                                 <div>
