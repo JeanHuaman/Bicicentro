@@ -6,18 +6,13 @@
 package controlador;
 
 
-import datos.CategoriaDaoJDBC;
-import datos.MarcaDaoJDBC;
 import datos.ProductoDaoJDBC;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
-import modelo.Categoria;
-import modelo.Marca;
 import modelo.Producto;
 
 
@@ -75,7 +70,7 @@ public class ProductoControlador extends HttpServlet{
         
         
                 
-        response.sendRedirect("vista/administrador.jsp");
+        response.sendRedirect("index.jsp");
     }
     
     private void productosFiltrados(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException{
@@ -142,7 +137,7 @@ public class ProductoControlador extends HttpServlet{
         Producto producto = new Producto(nombre,imagen,idmarca,idcategoria,cantidad,precio,descripcion);
         
         int cantidadInserto = new ProductoDaoJDBC().insertar(producto);
-        this.accionDefault(request, response);
+        request.getRequestDispatcher("vista/editarProducto.jsp").forward(request, response);
     }
 }
 

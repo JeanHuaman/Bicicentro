@@ -4,6 +4,7 @@
     Author     : JEAN
 --%>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -24,7 +25,7 @@
                 <main>
                     <section>
                         <article>
-                          <h2>#90423582</h2>
+                          <h2># ${numeroPedido}</h2>
                           <p>Despachado por: BiciCentro</p>
                           <p>Entregado por Delivery</p>
                           <p>Carretera Central S/N Av-Las Anemonas</p>
@@ -33,14 +34,17 @@
                         </article>
                         <article>
                             <!--ForEach -->
-                            <p>
-                                <span>BMX</span>
-                                <span>$240</span>
-                            </p>
+                            <c:forEach var="producto" items="${detalleProductos}">
+                               <p>
+                                <span>${producto.getNombreProducto()}</span>
+                                <span>${producto.getSubtotal()}</span>
+                            </p> 
+                            </c:forEach>
+                            
                             <span>---------</span>
                             <div>
                                 <span>Total : </span>
-                                <span>$248</span>
+                                <span>$ ${total}</span>
                             </div>
                         </article>
                     </section>

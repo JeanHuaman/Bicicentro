@@ -21,7 +21,7 @@
         <header class="bg-success bg-gradient py-2">
             <div class="container row mx-auto">
                 <div class="col-3 justify-content-left">
-                    <img src="${pageContext.request.contextPath}/img/logo.png" alt="logo" width="100px" height="100px">
+                    <img src="${pageContext.request.contextPath}/img/Logo.png" alt="logo" width="100px" height="100px">
                 </div>
                 <div class="col-9 align-self-center text-center">
                     <h1>BiciCentro</h1>
@@ -106,11 +106,11 @@
                                             <div class="mb-3 col-3">
                                                 <label class="form-label" for="imagen">Imagen</label>
                                                 <select class="form-select" name="imagen">
-                                                    <option value="../img/biciGras.jpg">Montañera</option>
-                                                    <option value="../img/biciNaranja.jpg">Bmx</option>
-                                                    <option value="../img/biciNegroRojo.jpg">Bicicleta Plegable</option>
-                                                    <option value="../img/biciRojo.jpg">Triatlón</option>
-                                                    <option value="../img/biciVerdeAzul.jpg">paseo</option>
+                                                    <option value="img/biciGras.jpg">Montañera</option>
+                                                    <option value="img/biciNaranja.jpg">Bmx</option>
+                                                    <option value="img/biciNegroRojo.jpg">Bicicleta Plegable</option>
+                                                    <option value="img/biciRojo.jpg">Triatlón</option>
+                                                    <option value="img/biciVerdeAzul.jpg">paseo</option>
                                                 </select>
                                             </div>
                                         </div>

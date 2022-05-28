@@ -29,6 +29,15 @@ public class UsuarioControlador extends HttpServlet {
                 case "actualizarCantidad":
                     this.actualizarCantidad(request, response);
                     break;
+                case "cerrarSesion":
+                    this.cerrarSession(request, response);
+                    break;
+                case "verPedido":
+                    this.verPedido(request, response);
+                    break;
+                case "retirarProducto":
+                    this.retirarProducto(request, response);
+                    break;
                 default:
                     this.accionDefault(request, response);
                     break;
@@ -192,6 +201,48 @@ public class UsuarioControlador extends HttpServlet {
         }
         sesion.setAttribute("total", total);
 
+        response.sendRedirect("./vista/pedido.jsp");
+    }
+
+    private void cerrarSession(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        HttpSession sesion = request.getSession();
+        sesion.invalidate();
+        response.sendRedirect("index.jsp");
+    }
+
+    private void verPedido(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        HttpSession sesion = request.getSession();
+        double total=0;
+        if(sesion.getAttribute("total") != null)
+        {
+            total = (double) sesion.getAttribute("total");
+        }
+        
+        Usuario usuario = (Usuario) sesion.getAttribute("usuario");
+        
+
+        request.setAttribute("usuario", usuario);
+        sesion.setAttribute("total", total);
+        request.getRequestDispatcher("./vista/pedido.jsp").forward(request, response);
+    }
+
+    private void retirarProducto(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        HttpSession sesion = request.getSession();
+
+        double total = (double) sesion.getAttribute("total");
+        int idProducto = Integer.parseInt(request.getParameter("idProducto"));
+        int posicion = 0;
+        List<Producto> carrito = (List<Producto>) sesion.getAttribute("carrito");
+
+        for (int i = 0; i < carrito.size(); i++) {
+            if (carrito.get(i).getIdProducto() == idProducto) {
+                posicion = i;
+                total=total-(carrito.get(i).getCantidad()*carrito.get(i).getPrecio());
+            }
+        }
+
+        sesion.setAttribute("total", total);
+        carrito.remove(posicion);
         response.sendRedirect("./vista/pedido.jsp");
     }
 }

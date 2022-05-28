@@ -1,7 +1,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page import="modelo.Usuario"%>
 <%
-    Usuario usuario = (Usuario) session.getAttribute("usuario");
+    /*  Usuario usuario = (Usuario) session.getAttribute("usuario");
+    
     if (usuario.getApellido() == null) {
         usuario.setApellido("");
     }
@@ -16,7 +17,7 @@
     }
     if (usuario.getDni() == null) {
         usuario.setDni("");
-    }
+    }*/
 
 
 %>
@@ -28,9 +29,33 @@
     </head>
     <body>
         <header class="p-3">
-            <div>
-                <a class="btn btn-primary" href="${pageContext.request.contextPath}/index.jsp">Ir al catálogo</a>
-            </div>
+            <nav>
+                <div>
+                    <a class="btn btn-primary" href="${pageContext.request.contextPath}/index.jsp">Ir al catálogo</a>
+                </div>
+                <%                Usuario usuario = (Usuario) session.getAttribute("usuario");
+                    if (usuario != null) {
+                %>            
+                <div class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <%= usuario.getUser()%>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="${pageContext.request.contextPath}/vista/editarUsuario.jsp">Datos Personales</a></li>
+                        <li><a class="dropdown-item" href="${pageContext.request.contextPath}/PedidoControlador?accion=historial&idUsuario=<%= usuario.getIdUsuario()%>">Ver Historial</a></li>
+                        <li><a class="dropdown-item" href="${pageContext.request.contextPath}/UsuarioControlador?accion=cerrarSesion">Cerrar Sesión</a></li>
+                    </ul>
+                </div>
+                <%
+                } else {
+                %>
+                <div>
+                    <a href="${pageContext.request.contextPath}/vista/login.jsp">Iniciar Sesión</a>
+                </div>
+                <%
+                    }
+                %>
+            </nav>
         </header>
         <main>
             <section>
@@ -39,22 +64,26 @@
                         <div><h2>Ya casi terminas</h2></div>
                         <div class="mb-3">
                             <label for="direccion" class="form-label">¿En dónde enviamos el pedido?</label>
-                            <input type="text" name="celular" class="form-control" value="<%= usuario.getDireccion()%>">
+                            <input type="text" name="direccion" class="form-control" value="${usuario.getDireccion()}">
                         </div>
                         <div class="mb-3">
-                            <label for="celular" class="form-label">Nombre completo</label>
-                            <input type="text" name="celular" class="form-control" value="<%= usuario.getNombre()%> <%= usuario.getApellido()%>">
+                            <label for="nombre" class="form-label">Nombre completo</label>
+                            <input type="text" name="nombre" class="form-control" value="${usuario.getNombre()}">
                         </div>
                         <div class="mb-3">
-                            <label for="celular" class="form-label">Documento de identidad</label>
-                            <input type="text" name="celular" class="form-control" value="<%= usuario.getDni()%>">
+                            <label for="apellido" class="form-label">Apellido completo</label>
+                            <input type="text" name="apellido" class="form-control" value="${usuario.getApellido()}">
+                        </div>
+                        <div class="mb-3">
+                            <label for="dni" class="form-label">Documento de identidad</label>
+                            <input type="text" name="dni" class="form-control" value="${usuario.getDni()}">
                         </div>
                         <div class="mb-3">
                             <label for="celular" class="form-label">Celular</label>
-                            <input type="text" name="celular" class="form-control" value="<%= usuario.getCelular()%>">
+                            <input type="text" name="celular" class="form-control" value="${usuario.getCelular()}">
                         </div>
                         <div class="mb-3 row justify-content-between">
-                            <label for="celular" class="form-label col-4">Tipo de Pago</label>
+                            <label for="pago" class="form-label col-4">Tipo de Pago</label>
                             <div class="col-5">
                                 <select class="form-select" name="pago">           
                                     <option value="efectivo">Efectivo</option>
@@ -82,6 +111,7 @@
                                                     <a href="${pageContext.request.contextPath}/UsuarioControlador?accion=actualizarCantidad&motivo=aumentar&idProducto=${producto.getIdProducto()}">+</a>
                                                     <input type="text" min="1" id="cantidad" value="${producto.getCantidad()}" />
                                                     <a href="${pageContext.request.contextPath}/UsuarioControlador?accion=actualizarCantidad&motivo=disminuir&idProducto=${producto.getIdProducto()}">-</a>
+                                                    <a href="${pageContext.request.contextPath}/UsuarioControlador?accion=retirarProducto&idProducto=${producto.getIdProducto()}">Eliminar</a>
                                                 </td>
                                                 <td>$ ${producto.getPrecio() * producto.getCantidad()}</td>
                                             </tr> 
@@ -100,6 +130,17 @@
                             <div>
                                 <button type="submit">Finalizar Compra</button>
                             </div>
+                            <c:if test="${usuario==null}">
+                                <div>
+                                    <p>Necesita Iniciar sesión para realizar la compra</p>
+                                </div>  
+                            </c:if>
+                            <c:if test="${comprado}">
+                                <div>
+                                    <p>Se realizo correctamente la compra</p>
+                                </div>  
+                            </c:if>
+
                         </div>
                     </article>
                 </form>

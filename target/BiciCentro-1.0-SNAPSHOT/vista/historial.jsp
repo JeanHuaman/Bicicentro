@@ -30,7 +30,7 @@
                         </div>
                         <p>Despachado por Bicicentro</p>
                         <div>
-                            <a href="${pageContext.request.contextPath}/PedidoControlador?accion=detallePedido&idPedido=${pedido.getIdPedido()}">Ver Detalle</a>
+                            <a href="${pageContext.request.contextPath}/DetallePedidoControlador?accion=detallePedido&numeroPedido=${pedido.getNumeroPedido()}&idPedido=${pedido.getIdPedido()}">Ver Detalle</a>
                         </div>
                     </div>
                     <div>

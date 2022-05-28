@@ -13,15 +13,15 @@
                 <form action="${pageContext.request.contextPath}/UsuarioControlador?accion=agregarUsuario" method="POST">
                     <div class="mb-3 text-start">
                         <label for="usuario" class="form-label">Usuario</label>
-                        <input type="text" class="form-control" id="usuario" name="usuario" aria-describedby="emailHelp">
+                        <input type="text" class="form-control" id="usuario" name="usuario" aria-describedby="emailHelp" required>
                     </div>
                     <div class="mb-3 text-start ">
                         <label for="email" class="form-label">Email</label>
-                        <input type="email" class="form-control" id="email" name="email" aria-describedby="emailHelp">
+                        <input type="email" class="form-control" id="email" name="email" aria-describedby="emailHelp" required>
                     </div>
                     <div class="mb-3 text-start">
                         <label for="password" class="form-label">Contraseña</label>
-                        <input type="password" class="form-control" id="password" name="password">
+                        <input type="password" class="form-control" id="password" name="password" required>
                     </div>                                
                     <div>
                         <input type="submit" class="button btn btn-primary" value="Registrarse"/>

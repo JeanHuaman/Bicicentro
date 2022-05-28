@@ -6,6 +6,7 @@ modelo\Categoria.class
 modelo\DetallePedido.class
 controlador\UsuarioControlador.class
 datos\CategoriaDaoJDBC.class
+controlador\DetallePedidoControlador.class
 datos\DetallePedidoDaoJDBC.class
 modelo\Pedido.class
 modelo\Producto.class
